@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/CeloDealer/static/css/main.8c8b27cf.chunk.css",
+    "main.js": "/CeloDealer/static/js/main.94fd8ccf.chunk.js",
+    "main.js.map": "/CeloDealer/static/js/main.94fd8ccf.chunk.js.map",
+    "runtime-main.js": "/CeloDealer/static/js/runtime-main.c0f535ef.js",
+    "runtime-main.js.map": "/CeloDealer/static/js/runtime-main.c0f535ef.js.map",
+    "static/js/2.431d2dfc.chunk.js": "/CeloDealer/static/js/2.431d2dfc.chunk.js",
+    "static/js/2.431d2dfc.chunk.js.map": "/CeloDealer/static/js/2.431d2dfc.chunk.js.map",
+    "index.html": "/CeloDealer/index.html",
+    "static/css/main.8c8b27cf.chunk.css.map": "/CeloDealer/static/css/main.8c8b27cf.chunk.css.map",
+    "static/js/2.431d2dfc.chunk.js.LICENSE.txt": "/CeloDealer/static/js/2.431d2dfc.chunk.js.LICENSE.txt",
+    "static/media/car.257148b0.png": "/CeloDealer/static/media/car.257148b0.png",
+    "static/media/slide-img1.2f772842.jpg": "/CeloDealer/static/media/slide-img1.2f772842.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c0f535ef.js",
+    "static/js/2.431d2dfc.chunk.js",
+    "static/css/main.8c8b27cf.chunk.css",
+    "static/js/main.94fd8ccf.chunk.js"
+  ]
+}
