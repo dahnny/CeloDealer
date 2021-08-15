@@ -13,7 +13,7 @@ const Header = props => {
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav main-menu mr-auto">
                                 
-                                <li><a href="#">Balance: ${props.balance}CUSD</a></li>
+                                <li><a href="#">USD Balance: ${props.balance}CUSD |||| Celo Balance: ${props.celo}</a></li>
                                 
                             </ul>
                         </div>

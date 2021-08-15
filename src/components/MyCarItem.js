@@ -7,7 +7,7 @@ const MyCarItem = props => {
                                 <div className="car-item-body">
                                     <div className="content">
                                         <h4 className="title">{props.car.carName}</h4>
-                                        <span className="price">Price:${props.car.price.c/1000000000000000000}</span>
+                                        <span className="price">Price:${props.car.price/1000000000000000000}</span>
                                         <p>{props.car.carDescription}</p>
                                         <a onClick = {()=>props.sellCar(props.car.index)} className="cmn-btn">Sell Car</a><a onClick = {()=>props.rentCar(props.car.index)} className="cmn-btn">Rent your Car</a>
                                     </div>

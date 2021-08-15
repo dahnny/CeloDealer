@@ -18,7 +18,7 @@ const SalesCars = props => {
                     </div>
                     <div className="row">
 
-                        {props.cars.map(car => (car.isRent === 'false' || car.isRent === false) && <SalesCarItem key={car.index} car={car} buyCar={props.buyCar} />)}
+                        {props.cars.map(car => (car.isSale === 'true' || car.isSale === true) && <SalesCarItem key={car.index} car={car} buyCar={props.buyCar} />)}
 
                     </div>
                 </div>

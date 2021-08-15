@@ -24,7 +24,7 @@ const cUSDContractAddress = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1"
 
 function App() {
 
-
+  const [celoBalance, setCeloBalance] = useState(0);
   const [contract, setcontract] = useState(null);
   const [address, setAddress] = useState(null);
   const [kit, setKit] = useState(null);
@@ -83,12 +83,15 @@ function App() {
   }, [contract]);
 
   const getBalance = async () => {
+    
     const balance = await kit.getTotalBalance(address);
+    const celoBalance = balance.CELO.shiftedBy(-ERC20_DECIMALS).toFixed(2);
     const USDBalance = balance.cUSD.shiftedBy(-ERC20_DECIMALS).toFixed(2);
 
     const contract = new kit.web3.eth.Contract(cardealer, contractAddress);
     console.log(contract);
     setcontract(contract);
+    setCeloBalance(celoBalance);
     setcUSDBalance(USDBalance);
   };
 
@@ -125,6 +128,7 @@ function App() {
     const _myCars = cars.filter((car)=>{
       return (car.owner === address && (car.isSale === false && car.isRent === false));
     })    
+    console.log(_myCars);
     setMyCars(_myCars);
     
   }
@@ -160,7 +164,7 @@ function App() {
   const buyCar = async (_price, _index) => {
     try {
       const cUSDContract = new kit.web3.eth.Contract(erc20, cUSDContractAddress);
-
+      console.log(_price);
       const cost = new BigNumber(_price).shiftedBy(ERC20_DECIMALS).toString();
 
       console.log({ cost, _index });
@@ -182,7 +186,7 @@ function App() {
     try {
       console.log({ index });
 
-      await contract.methods.sell(index).send({ from: address });
+      await contract.methods.sellCar(index).send({ from: address });
 
       getCars();
     } catch (error) {
@@ -196,7 +200,7 @@ function App() {
     try {
       console.log({ index });
 
-      await contract.methods.rent(index).send({ from: address });
+      await contract.methods.rentCar(index).send({ from: address });
 
       getCars();
     } catch (error) {
@@ -208,7 +212,7 @@ function App() {
   return (
 
     <div className="content">
-      <Header balance={cUSDBalance} />
+      <Header balance={cUSDBalance} celo = {celoBalance}/>
       <Banner />
       <SalesCars cars={cars} buyCar = {buyCar}/>
       <RentCars cars={cars} buyCar = {buyCar}/>
