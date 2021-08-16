@@ -25,6 +25,8 @@ contract CarDealer{
         bool isUsed; //is car used
         bool isRent;
         bool isSale;
+        bool isBought;
+        bool isRented;
     }
     
     
@@ -68,7 +70,9 @@ contract CarDealer{
               _price,
               _isUsed,
               _isRent,
-              _isSale
+              _isSale,
+              false,
+              false
         );
         carLength++;
     }
@@ -82,6 +86,8 @@ contract CarDealer{
         uint,
         bool,
         bool,
+        bool,
+        bool,
         bool
     ) {
         Car storage car = cars[_index];
@@ -93,7 +99,9 @@ contract CarDealer{
           car.price,
           car.isUsed,
           car.isRent,
-          car.isSale
+          car.isSale,
+          car.isBought,
+          car.isRented
         );
     }
     
@@ -114,7 +122,26 @@ contract CarDealer{
         // change the sale and rent status
         cars[_index].isSale = false;
         cars[_index].isRent = false;
+        cars[_index].isBought = true;
         
+    }
+     function rentingCar(uint _index) public  payable forRent(_index) {
+     
+        require(
+          IERC20Token(cUsdTokenAddress).transferFrom(
+            msg.sender,
+            cars[_index].owner,
+            cars[_index].price
+          ),
+          "This transaction could not be performed"
+        );
+        
+        // change owner
+        cars[_index].owner = payable(msg.sender);
+        // change the sale and rent status
+        cars[_index].isSale = false;
+        cars[_index].isRent = false;
+        cars[_index].isRented = true; 
         
     }
     
@@ -122,12 +149,14 @@ contract CarDealer{
     function sellCar(uint _index) public isOwner(_index){
         cars[_index].isSale = true;
         cars[_index].isRent = false;
+        cars[_index].isBought = false;
     }
     
     // function for user to auction his car
     function rentCar(uint _index) public isOwner(_index){
         cars[_index].isRent = true;
         cars[_index].isSale = false;
+        cars[_index].isRented = false;
     }
     // function to get the length of the car array
     function getCarLength() public view returns (uint) {
