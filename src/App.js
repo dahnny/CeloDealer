@@ -113,7 +113,9 @@ function App() {
           price: new BigNumber(c[4]),
           isUsed: c[5],
           isRent: c[6],
-          isSale:c[7]
+          isSale:c[7],
+          isBought: c[8],
+          isRented: c[9]
         })
       });
 
