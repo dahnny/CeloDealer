@@ -9,7 +9,11 @@ const MyCarItem = props => {
                                         <h4 className="title">{props.car.carName}</h4>
                                         <span className="price">Price:${props.car.price/1000000000000000000}</span>
                                         <p>{props.car.carDescription}</p>
-                                        <a onClick = {()=>props.sellCar(props.car.index)} className="cmn-btn">Sell Car</a><a onClick = {()=>props.rentCar(props.car.index)} className="cmn-btn">Rent your Car</a>
+                                        {(props.car.isBought === true && props.car.isRented === false) ? <div>
+                                        <a onClick = {()=>props.sellCar(props.car.index)} className="cmn-btn">Sell Car</a>
+                                        <a onClick = {()=>props.rentCar(props.car.index)} className="cmn-btn">Rent your Car</a>
+                                        </div> : <p>This car is rented!!</p>}
+                                        
                                     </div>
                                     <div className="car-item-meta">
                                         <ul className="details-list">

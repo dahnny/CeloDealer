@@ -18,7 +18,7 @@ import erc20 from './abis/irc.abi.json';
 
 const ERC20_DECIMALS = 18;
 
-const contractAddress = "0x3E63EAFA9Bd0e9fc589c1666F95CAEfeAd293ed6";
+const contractAddress = "0x83dce46765c4420b8E93eE1b2e9Fc79d254E9212";
 const cUSDContractAddress = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1"
 
 
@@ -168,11 +168,32 @@ function App() {
       const cost = new BigNumber(_price).shiftedBy(ERC20_DECIMALS).toString();
 
       console.log({ cost, _index });
-      await cUSDContract.methods
+      const result = await cUSDContract.methods
         .approve(contractAddress, cost)
         .send({ from: address });
 
       await contract.methods.buyCar(_index).send({ from: address });
+      // return result
+      getBalance();
+      getCars();
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+    // function to initiate transaction
+  const rentingCar = async (_price, _index) => {
+    try {
+      const cUSDContract = new kit.web3.eth.Contract(erc20, cUSDContractAddress);
+      console.log(_price);
+      const cost = new BigNumber(_price).shiftedBy(ERC20_DECIMALS).toString();
+
+      console.log({ cost, _index });
+      const result = await cUSDContract.methods
+        .approve(contractAddress, cost)
+        .send({ from: address });
+
+      await contract.methods.rentingCar(_index).send({ from: address });
       // return result
       getBalance();
       getCars();
@@ -215,7 +236,7 @@ function App() {
       <Header balance={cUSDBalance} celo = {celoBalance}/>
       <Banner />
       <SalesCars cars={cars} buyCar = {buyCar}/>
-      <RentCars cars={cars} buyCar = {buyCar}/>
+      <RentCars cars={cars} rentCar = {rentingCar}/>
       <AddCar addToCars={addtoCars} />
       <MyCar cars = {myCars} sellCar = {sellCar} rentCar = {rentCar}/>
       <Footer/>

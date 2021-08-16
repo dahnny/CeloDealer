@@ -19,7 +19,7 @@ const RentCars = props => {
                     </div>
                     <div className="row">
 
-                        {props.cars.map(car => (car.isRent === 'true' || car.isRent === true) && <RentCarItem key={car.index} car={car} rentCar={props.buyCar} />)}
+                        {props.cars.map(car => (car.isRent === 'true' || car.isRent === true) && <RentCarItem key={car.index} car={car} rentCar={props.rentCar} />)}
 
                     </div>
                 </div>
