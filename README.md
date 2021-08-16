@@ -1,5 +1,7 @@
 # CeloDealer is a decentralized platform for buying or renting cars using the celo blockchain. With this app, users are able to create a car alias, sell and rent it without any middleman. Users also have the added feature of purchasing cars directly from the app and it will be automatically added to their collection. 
 
+# The link to the project described is [https://dahnny.github.io/CeloDealer/]https://dahnny.github.io/CeloDealer/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
