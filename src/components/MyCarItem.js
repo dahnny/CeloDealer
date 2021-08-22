@@ -17,9 +17,8 @@ const MyCarItem = props => {
                                     </div>
                                     <div className="car-item-meta">
                                         <ul className="details-list">
-                                            <li><i className="fa fa-car" />model 2014ib</li>
-                                            <li><i className="fa fa-tachometer" />32000 KM</li>
-                                            <li><i className="fa fa-sliders" />auto</li>
+                                            <li><i className="fa fa-car" />{props.car.carName}</li>
+                                      
                                         </ul>
                                     </div>
                                 </div>
