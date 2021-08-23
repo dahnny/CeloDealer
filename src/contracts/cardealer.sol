@@ -21,7 +21,9 @@ contract CarDealer{
         string carName;
         string carDescription;
         string carImage; //car image
+        string documents; //ipfs_hash
         uint price;
+        uint timestamp; //time vehicle was uploaded
         bool isUsed; //is car used
         bool isRent;
         bool isSale;
@@ -57,6 +59,7 @@ contract CarDealer{
         string memory _carName,
         string memory _carDescription,
         string memory _carimage,
+        string memory _documents,
         bool _isUsed,
         bool _isRent,
         bool _isSale,
@@ -67,7 +70,9 @@ contract CarDealer{
               _carName,
               _carDescription,
               _carimage,
+              _documents,
               _price,
+              block.timestamp,
               _isUsed,
               _isRent,
               _isSale,
@@ -83,6 +88,8 @@ contract CarDealer{
         string memory,
         string memory,
         string memory,
+        string memory,
+        uint,
         uint,
         bool,
         bool,
@@ -96,7 +103,9 @@ contract CarDealer{
           car.carName,
           car.carDescription,
           car.carImage,
+          car.documents,
           car.price,
+          car.timestamp,
           car.isUsed,
           car.isRent,
           car.isSale,

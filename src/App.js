@@ -18,7 +18,7 @@ import erc20 from './abis/irc.abi.json';
 
 const ERC20_DECIMALS = 18;
 
-const contractAddress = "0x83dce46765c4420b8E93eE1b2e9Fc79d254E9212";
+const contractAddress = "0x87d5Dc44E5F3e7df649758edbe15152B7f2a802D";
 const cUSDContractAddress = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1"
 
 
@@ -77,7 +77,6 @@ function App() {
 
   useEffect(() => {
     if (contract) {
-      console.log('reached here')
       getCars()
     };
   }, [contract]);
@@ -98,7 +97,6 @@ function App() {
   // function to get the list of cars from the celo blockchain
   const getCars = async function () {
     const carLength = await contract.methods.getCarLength().call();
-    console.log(`${carLength} is the length`);
     const _cars = [];
 
     for (let index = 0; index < carLength; index++) {
@@ -166,11 +164,10 @@ function App() {
   const buyCar = async (_price, _index) => {
     try {
       const cUSDContract = new kit.web3.eth.Contract(erc20, cUSDContractAddress);
-      console.log(_price);
+  
       const cost = new BigNumber(_price).shiftedBy(ERC20_DECIMALS).toString();
 
-      console.log({ cost, _index });
-      const result = await cUSDContract.methods
+     await cUSDContract.methods
         .approve(contractAddress, cost)
         .send({ from: address });
 
@@ -187,11 +184,10 @@ function App() {
   const rentingCar = async (_price, _index) => {
     try {
       const cUSDContract = new kit.web3.eth.Contract(erc20, cUSDContractAddress);
-      console.log(_price);
+ 
       const cost = new BigNumber(_price).shiftedBy(ERC20_DECIMALS).toString();
 
-      console.log({ cost, _index });
-      const result = await cUSDContract.methods
+     await cUSDContract.methods
         .approve(contractAddress, cost)
         .send({ from: address });
 
@@ -207,8 +203,6 @@ function App() {
   // function that is called to make a car available for sale
   const sellCar = async (index) => {
     try {
-      console.log({ index });
-
       await contract.methods.sellCar(index).send({ from: address });
 
       getCars();
@@ -221,7 +215,6 @@ function App() {
   // function that is called to make a car available for rentals
   const rentCar = async (index) => {
     try {
-      console.log({ index });
 
       await contract.methods.rentCar(index).send({ from: address });
 
