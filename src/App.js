@@ -48,10 +48,10 @@ function App() {
         kit.defaultAccount = user_address;
 
         await setAddress(user_address);
-        console.log(user_address);
+
 
         await setKit(kit);
-        console.log(kit)
+
       } catch (error) {
         console.log('There is an error')
         console.log({ error });
@@ -77,7 +77,6 @@ function App() {
 
   useEffect(() => {
     if (contract) {
-      console.log('reached here')
       getCars()
     };
   }, [contract]);
@@ -89,7 +88,6 @@ function App() {
     const USDBalance = balance.cUSD.shiftedBy(-ERC20_DECIMALS).toFixed(2);
 
     const contract = new kit.web3.eth.Contract(cardealer, contractAddress);
-    console.log(contract);
     setcontract(contract);
     setCeloBalance(celoBalance);
     setcUSDBalance(USDBalance);
@@ -98,7 +96,6 @@ function App() {
   // function to get the list of cars from the celo blockchain
   const getCars = async function () {
     const carLength = await contract.methods.getCarLength().call();
-    console.log(`${carLength} is the length`);
     const _cars = [];
 
     for (let index = 0; index < carLength; index++) {
@@ -120,7 +117,6 @@ function App() {
       });
 
       _cars.push(_car);
-      console.log(_car);
     }
     const cars = await Promise.all(_cars);
     
@@ -130,19 +126,16 @@ function App() {
     const _myCars = cars.filter((car)=>{
       return (car.owner === address && (car.isSale === false && car.isRent === false));
     })    
-    console.log(_myCars);
     setMyCars(_myCars);
     
   }
 
   // function to add cars to block
   const addtoCars = async (_name, _description, _image, _price, _isUsed, _isRent, _isSale) => {
-    console.log(_name, _description, _image, _price, _isUsed, _isRent, _isSale);
     try {
       const price = new BigNumber(_price)
         .shiftedBy(ERC20_DECIMALS).toString();
 
-      console.log({price});
 
       await contract.methods
         .setCar(
@@ -166,10 +159,8 @@ function App() {
   const buyCar = async (_price, _index) => {
     try {
       const cUSDContract = new kit.web3.eth.Contract(erc20, cUSDContractAddress);
-      console.log(_price);
       const cost = new BigNumber(_price).shiftedBy(ERC20_DECIMALS).toString();
 
-      console.log({ cost, _index });
       const result = await cUSDContract.methods
         .approve(contractAddress, cost)
         .send({ from: address });
@@ -187,11 +178,9 @@ function App() {
   const rentingCar = async (_price, _index) => {
     try {
       const cUSDContract = new kit.web3.eth.Contract(erc20, cUSDContractAddress);
-      console.log(_price);
       const cost = new BigNumber(_price).shiftedBy(ERC20_DECIMALS).toString();
 
-      console.log({ cost, _index });
-      const result = await cUSDContract.methods
+      await cUSDContract.methods
         .approve(contractAddress, cost)
         .send({ from: address });
 
@@ -207,7 +196,6 @@ function App() {
   // function that is called to make a car available for sale
   const sellCar = async (index) => {
     try {
-      console.log({ index });
 
       await contract.methods.sellCar(index).send({ from: address });
 
@@ -221,7 +209,6 @@ function App() {
   // function that is called to make a car available for rentals
   const rentCar = async (index) => {
     try {
-      console.log({ index });
 
       await contract.methods.rentCar(index).send({ from: address });
 
